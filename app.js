@@ -1,27 +1,34 @@
 (function () {
 'use strict';
 
-angular.module('NameCalculator', [])
+angular.module('CounterApp',[])
+.controller('CounterController', CounterController);
 
-.controller('NameCalculatorController', function($scope){
-$scope.name = "";
-$scope.totalValue = 0;
-$scope.stateOfHungry = "hungry";
-$scope.feed = function(){
-	$scope.stateOfHungry = "fed"
-};
-$scope.displayNumeric = function(){
-	var totalNameValue = calculateNumericForString($scope.name);
-	$scope.totalValue = totalNameValue;
-};
+CounterController.$inject = ['$scope'];
+function CounterController($scope){
+	$scope.onceCounter = 0; 
+	$scope.counter = 0; 
+	$scope.showNumberOfWatchers = function(){
+		console.log($scope.$$watchersCount);
+	};
+	$scope.countOnce = function(){
+		$scope.onceCounter = 1; 
+		console.log($scope.$$watchersCount);
+	};
+ 
+   $scope.upCounter = function(){
+   	 $scope.counter++;
+   }
 
-function calculateNumericForString(string){
-  var totalStringValue = 0;
-	for(var i = 0;i<string.length; i++){
- 		totalStringValue += string.charCodeAt(i);
-	}
-	return totalStringValue;
-}
-});
+	/*$scope.$watch('onceCounter', function(newValue, oldValue){
+		console.log("old value: ", oldValue);
+		console.log("new value: ", newValue);
+	});
+
+	$scope.$watch('counter', function(newValue, oldValue){
+       console.log("old value: ", oldValue);
+       console.log("new value: ", newValue);
+	});*/
+};
 
 })();

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>body { font-size: 1.3em; }</style>
+    <title>Name Calculator</title>
+  </head>
+  <body ng-app="MsgApp">
+    <h1>Name Calculator</h1>
+    <div ng-controller="MsgController">
+      <div>
+      
+      
+       {{ sayLovesMessage() | truth : 'healthy' : 'cookie' | uppercase }}
+        <input type="text"
+          ng-model="name"
+          ng-keyup="displayNumeric();">
+      </div>
+      <div>Total Numeric value of person's name is: {{totalValue}}</div>
+      <div>
+       <button ng-click="feedYaakov()">Feed</button>
+       Cost : {{cookieCost | currency : "#blah" : 4 }}
+       <br>
+       <img ng-src="images/yaakov_{{stateOfBeing}}.png">
+      </div>
+    </div>
+  </body>
+</html>
