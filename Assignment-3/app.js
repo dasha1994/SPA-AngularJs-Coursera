@@ -33,19 +33,19 @@ function NarrowItDownController(MenuSearchService){
 
 	var list = this;
     list.searchTerm = "";
-    list.message = "";
+    
     list.found = [];
 	list.getMatchedMenuItems = function(){
-	 if(list.searchTerm.length===0){
+	 if(!list.searchTerm.length){
        list.message = 'SearchTerm is empty';
     }else{
+    	list.message = "";
 	var promise = MenuSearchService.getMatchedMenuItems(list.searchTerm);
 	promise.then(function (response){
 	     list.found = response;
 	});
 }
 }
-	console.log('searchTerm');
     list.removeItem = function (itemIndex) {
      list.found.splice(itemIndex,1);
     
@@ -70,7 +70,6 @@ function MenuSearchService($http,ApiBasePath){
     if(foundItems.length==0){
     	
     }
-    console.log(foundItems);
     return foundItems;
 });   
    
