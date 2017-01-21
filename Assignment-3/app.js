@@ -12,24 +12,38 @@ function FoundItemsDirective() {
     templateUrl: 'foundItems.html',
     scope: {
       items: '<',
-      onRemove: '&'
+      onRemove: '&',
+      message: '@message'
     },
+    controller: FoundItemsDirectiveController,
+    controllerAs: 'list',
+    bindToController: true
    };
 
   return ddo;
 }
 
 
+function FoundItemsDirectiveController(){
+	var list = this;
+}
+
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService){
 
 	var list = this;
     list.searchTerm = "";
+    list.message = "";
+    list.found = [];
 	list.getMatchedMenuItems = function(){
-	var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
+	 if(list.searchTerm.length===0){
+       list.message = 'SearchTerm is empty';
+    }else{
+	var promise = MenuSearchService.getMatchedMenuItems(list.searchTerm);
 	promise.then(function (response){
-         list.found = response;
+	     list.found = response;
 	});
+}
 }
 	console.log('searchTerm');
     list.removeItem = function (itemIndex) {
@@ -42,19 +56,20 @@ function MenuSearchService($http,ApiBasePath){
 	var service = this;
 	
 	service.getMatchedMenuItems = function(searchTerm){
-         return $http({
+	  return $http({
          	method: "GET",
       		url: (ApiBasePath + "/menu_items.json")
     	     
          }).then(function (result) {
-    
    var foundItems = [];
     for(var i = 0; i<result.data.menu_items.length;i++){
         if(result.data.menu_items[i].description.indexOf(searchTerm)!=-1){
         	foundItems.push(result.data.menu_items[i]);
         }
     }
-
+    if(foundItems.length==0){
+    	
+    }
     console.log(foundItems);
     return foundItems;
 });   
