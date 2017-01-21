@@ -1,7 +1,7 @@
 
 <ol class="list-group">
   <li class="list-group-item" ng-repeat="item in list.items">
-    {{ item.description }} of {{ item.name }}
+   {{ item.short_name}}, {{ item.description }} , {{ item.name }}
     <button class="btn btn-primary" ng-click="list.onRemove({index: $index});">Remove Item</button>
   </li>
 </ol>

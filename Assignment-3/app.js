@@ -50,6 +50,7 @@ function NarrowItDownController(MenuSearchService){
 }
 }
     list.removeItem = function (itemIndex) {
+       list.searchTerm = "";
      list.found.splice(itemIndex,1);
     
   };
