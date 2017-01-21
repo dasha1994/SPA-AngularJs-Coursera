@@ -43,6 +43,9 @@ function NarrowItDownController(MenuSearchService){
 	var promise = MenuSearchService.getMatchedMenuItems(list.searchTerm);
 	promise.then(function (response){
 	     list.found = response;
+	     if(list.found.length===0){
+	     	list.message = "Nothing found!"
+	     }
 	});
 }
 }
