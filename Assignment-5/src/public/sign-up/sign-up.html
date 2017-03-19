@@ -1,0 +1,64 @@
+ <fieldset>
+      <legend>Registration</legend>
+       
+      <div ng-if="!signCtrl.menuitemIsValid && regForm.$valid && regForm.$submitted">
+           No such menu number exists
+      </div>   
+      <span ng-if="regForm.$valid && regForm.$submitted && signCtrl.menuitemIsValid">
+            Your information has been saved
+          </span>
+      <form name='regForm' novalidate>
+
+        <input type="text" name="firstname" placeholder="Pick a firstname"
+          ng-model="signCtrl.user.firstname"
+          required
+          minlength="4"
+          ng-maxlength="10" style="color :#930">
+          {{ signCtrl.user.firstname }}
+          <span
+            ng-if="(regForm.firstname.$error.minlength || regForm.firstname.$error.required) && regForm.username.$touched">
+            FirstName must be at least 4 characters long
+          </span>
+          <br>
+
+        <input type="text" name="lastname" placeholder="Pick a lastname"
+          ng-model="signCtrl.user.lastname" style="color :#930"
+          required
+          minlength="4"
+          ng-maxlength="10">
+          {{ signCtrl.user.lastname }}
+          <span
+            ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched">
+            LastName must be at least 4 characters long
+          </span>
+          <br>
+
+        <input type="email" name="email" placeholder="Email" style="color :#930"
+          ng-model="signCtrl.user.email"
+          required>
+          <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+            Must be a valid email address: handle@domain format
+          </span>
+          <br>
+
+        <input type="text" name="phone" placeholder="Phone ###-###-####" style="color :#930"
+          ng-model="signCtrl.user.phone"
+          >
+          <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+            Phone must be in the format ###-###-####.
+          </span>
+          <br>
+
+           <input type="text" name="menuitem" placeholder="Menu item" style="color :#930"
+          ng-model="signCtrl.shortname" required="true" 
+          >
+          
+          <br>
+         
+        <button
+          ng-disabled="regForm.$invalid"
+          ng-click="signCtrl.setUser()">Submit</button>
+
+
+      </form>
+    </fieldset>

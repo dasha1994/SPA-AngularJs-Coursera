@@ -1,0 +1,14 @@
+<h3 ng-if="myInfoCtrl.user === null" ui-sref="signup">Not Signed Up Yet. Sign up Now!</h3>
+<div ng-if="myInfoCtrl.user != null" class="container">
+	 <span>Lastname: {{myInfoCtrl.user.lastname}}</span><br>
+	 <span>Firstname: {{myInfoCtrl.user.firstname}}</span><br>
+	 <span>Email: {{myInfoCtrl.user.email}}</span><br>
+	 <span>Phone: {{myInfoCtrl.user.phone}}</span><br>
+	 <span>Title: {{myInfoCtrl.user.menuitem.name}}</span><br>
+	 <span>Description: {{myInfoCtrl.user.menuitem.description}}</span><br>
+	 <div>
+	  <img class="img-responsive" width="250" height="150" ng-src="{{myInfoCtrl.basePath}}/images/{{myInfoCtrl.user.menuitem.short_name}}.jpg" alt="{{myInfoCtrl.user.menuitem.title}}">
+	  </div>
+	  
+	 
+</div>
